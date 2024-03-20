@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:url("image.jpg");
+            background-size: cover;
+            
+        }
+    
+        .form-container {
+            max-width: 400px;
+            margin-top:20px;
+            margin-left:30%;
+            padding: 20px;
+            border-radius:6px;
+            color:white;
+            background-color:black;
+        }
+        label{
+          display:flex;
+        }
+    
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4193e0;
+            color: rgb(255, 242, 242);
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #6583a0;
+        }
+    
+        .slide-menu {
+            width: 150px;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            height: 100%;
+            background-color: #f0f0f0;
+            transition: left 0.3s ease;
+        }
+      
+    
+        .slide-menu.open {
+            left: 0;
+            background-color: #4193e0;
+            align-items: center;
+        }
+    
+        .menu-content {
+            padding: 20px;
+            background-color: #4193e0;
+
+        }
+    
+        .menu-item {
+            margin-bottom: 10px;
+            font-weight:400 ;
+            font-size: medium;
+        }
+    
+        .menu-item a {
+            display: block;
+            color: #000000;
+            text-decoration: none;
+        }
+    
+        .menu-item a:hover {
+            color: #ffffff;
+        }
+    </style>
+    </head>
+    <body>
+    
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm" onsubmit="return submitForm()">
+            <label for="company">Select Company:</label>
+            <div id="selectedCompany" style="margin-bottom: 20px;"></div>
+            <button type="button" class="btn btn-primary" onclick="toggleMenu()">Select Company</button>
+    
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+    
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+    
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+    
+            <input type="submit" value="Register">
+        </form>
+    </div>
+    
+    <div class="slide-menu" id="slideMenu">
+  
+        <div class="menu-content">
+            <div class="menu-item">
+                <a href="amz.html" onclick="selectCompany('AMZ')">AMZ</a>
+            </div>
+            <div class="menu-item">
+                <a href="flp.html" onclick="selectCompany('FLP')">FLP</a>
+            </div>
+            <div class="menu-item">
+                <a href="snp.html" onclick="selectCompany('SNP')">SNP</a>
+            </div>
+            <div class="menu-item">
+              <a href="myn.html" onclick="selectCompany('MYN')">MYN</a>
+          </div>
+          <div class="menu-item">
+              <a href="azo.html" onclick="selectCompany('AZO')">AZO</a>
+          </div>
+      
+        </div>
+    </div>
+    
+    <script>
+        var selectedCompany = ""; 
+        function toggleMenu() {
+            var slideMenu = document.getElementById("slideMenu");
+            slideMenu.classList.toggle("open");
+        }
+function selectCompany(companyName) {
+            var selectedCompanyDiv = document.getElementById("selectedCompany");
+            selectedCompanyDiv.innerHTML = "<strong>Selected Company:</strong> " + companyName;
+            selectedCompany = companyName;
+            toggleMenu();
+        }
+    
+      
+        function submitForm() {
+            if (!selectedCompany) {
+                alert("Please select a company first.");
+                return false; 
+            }
+            window.location.href = selectedCompany.toLowerCase().replace(/\s+/g, '-') + ".html";
+    
+            return false;
+        }
+    </script>
+    
+    </body>
+    </html>
+    
